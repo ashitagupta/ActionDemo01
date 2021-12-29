@@ -44,14 +44,14 @@ jobs:
         echo $ | helm registry login barclaysacr02.azurecr.io --username barclaysacr02 --password AFnp+BILCUFnV9EuVTr9sxOBt/KqS=yU
         
     - name: Package the helm chart
-      run: helm package ./helm/ashihelmapp01-api
+      run: helm package ./helm/actiondemo01-api
       
     - name: save helm chart to local registry
       run: |
-       helm chart save ./ashihelmapp01-api-0.1.0.tgz barclaysacr02.azurecr.io/charts-ashihelmapp01-api:latest
+       helm chart save ./actiondemo01-api-0.1.0.tgz barclaysacr02.azurecr.io/charts-actiondemo01-api:latest
        
     - name: Helm chart Push
-      run: helm chart push barclaysacr02.azurecr.io/charts-ashihelmapp01-api:latest
+      run: helm chart push barclaysacr02.azurecr.io/charts-actiondemo01-api:latest
 
  
  
@@ -93,13 +93,13 @@ jobs:
       run : export HELM_EXPERIMENTAL_OCI=1  
       
     - name: Helm Chart Pull
-      run: helm chart pull barclaysacr02.azurecr.io/charts-ashihelmapp01-api:latest
+      run: helm chart pull barclaysacr02.azurecr.io/charts-actiondemo01-api:latest
    
     - name: Helm Chart Move
-      run: helm chart export barclaysacr02.azurecr.io/charts-ashihelmapp01-api:latest --destination ./install
+      run: helm chart export barclaysacr02.azurecr.io/charts-actiondemo01-api:latest --destination ./install
       
     - name: Helm Chart Install
-      run: helm upgrade --namespace ns-dev --install --set image.tag=latest ashihelmapp01-api ./install/ashihelmapp01-api # release name chart name
+      run: helm upgrade --namespace ns-dev --install --set image.tag=latest actiondemo01-api ./install/actiondemo01-api # release name chart name
      
       
       
